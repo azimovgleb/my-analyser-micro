@@ -1,0 +1,21 @@
+##spring.application.name=data-generator-microservice
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${HOST}:5432/${POSTGRES_DB}
+  jpa:
+    hibernate:
+      ddl-auto: none
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  liquibase:
+    change-log: classpath:liquibase/db.changelog.yaml
+    enabled: true
+server:
+  port: 8083
+
+topics: ${KAFKA_SUBSCRIBED_TOPICS}
